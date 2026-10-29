@@ -1,0 +1,13 @@
+{
+  "name": "Abuzaid — Portfolio",
+  "short_name": "Abuzaid",
+  "description": "AI/ML Engineer portfolio in a macOS-style desktop.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#05060a",
+  "theme_color": "#070a14",
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" }
+  ]
+}
