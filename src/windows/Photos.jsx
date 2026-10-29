@@ -41,7 +41,11 @@ export default function PhotosWindow() {
 
   const setCustomWallpaper = useOS((s) => s.setCustomWallpaper)
   const clearCustomWallpaper = useOS((s) => s.clearCustomWallpaper)
-  const customWallpaper = useOS((s) => s.customWallpaper)
+  const rawCustomWallpaper = useOS((s) => s.customWallpaper)
+  const customWallpaper =
+    rawCustomWallpaper && rawCustomWallpaper !== 'null' && rawCustomWallpaper !== 'undefined'
+      ? rawCustomWallpaper
+      : null
   const notify = useOS((s) => s.notify)
 
   // Save favorites to storage

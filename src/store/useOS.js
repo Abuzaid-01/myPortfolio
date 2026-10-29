@@ -9,14 +9,20 @@ import { wallpapers, windowConfig } from '@/constants'
 // ---- persisted preferences (localStorage can be blocked: always try/catch) ----
 const read = (key, fallback) => {
   try {
-    return localStorage.getItem(key) ?? fallback
+    const val = localStorage.getItem(key)
+    if (val === null || val === 'null' || val === 'undefined') return fallback
+    return val
   } catch {
     return fallback
   }
 }
 const write = (key, value) => {
   try {
-    localStorage.setItem(key, String(value))
+    if (value === null || value === undefined || value === 'null' || value === 'undefined') {
+      localStorage.removeItem(key)
+    } else {
+      localStorage.setItem(key, String(value))
+    }
   } catch {
     /* ignore */
   }
@@ -25,6 +31,17 @@ const write = (key, value) => {
 const initialWallpaper = (() => {
   const id = read('portfolio-wallpaper', wallpapers[0].id)
   return wallpapers.some((w) => w.id === id) ? id : wallpapers[0].id
+})()
+
+const initialCustomWallpaper = (() => {
+  const v = read('portfolio-custom-wallpaper', null)
+  if (!v || v === 'null' || v === 'undefined' || typeof v !== 'string' || !v.trim()) {
+    try {
+      localStorage.removeItem('portfolio-custom-wallpaper')
+    } catch {}
+    return null
+  }
+  return v
 })()
 
 const initialBrightness = (() => {
@@ -135,7 +152,7 @@ export const useOS = create((set, get) => ({
 
   // ===== wallpaper + display =====
   wallpaperId: initialWallpaper,
-  customWallpaper: read('portfolio-custom-wallpaper', null),
+  customWallpaper: initialCustomWallpaper,
   brightness: initialBrightness,
   setWallpaper: (id) => {
     if (!wallpapers.some((w) => w.id === id)) return
@@ -144,6 +161,7 @@ export const useOS = create((set, get) => ({
     set({ wallpaperId: id, customWallpaper: null })
   },
   setCustomWallpaper: (url) => {
+    if (!url || url === 'null' || url === 'undefined') return
     write('portfolio-custom-wallpaper', url)
     set({ customWallpaper: url })
   },

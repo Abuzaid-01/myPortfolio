@@ -203,6 +203,7 @@ export const dockApps = [
   { id: 'linkedin', label: 'LinkedIn', app: 'LinkedIn', icon: 'Linkedin', colors: ['#3b9bff', '#0a56b8'], fg: '#ffffff' },
   { id: 'x', label: 'X', app: 'X', icon: 'X', colors: ['#27272a', '#09090b'], fg: '#ffffff' },
   { type: 'separator', desktopOnly: true },
+  { id: 'settings', label: 'Settings', app: 'System Settings', icon: 'Settings', colors: ['#e5e7eb', '#9ca3af'], fg: '#1f2937' },
   { id: 'trash', label: 'Trash', app: 'Trash', icon: 'Trash2', action: 'trash', desktopOnly: true, colors: ['#a1a8b3', '#4b5563'], fg: '#ffffff' },
 ]
 
@@ -212,6 +213,7 @@ export const windowConfig = {
   finder: { title: 'Projects', width: 880, height: 580 },
   notes: { title: 'About Me', width: 900, height: 640 },
   photos: { title: 'Photos — Abuzaid', width: 940, height: 640 },
+  settings: { title: 'System Settings', width: 880, height: 620 },
   terminal: { title: 'abuzaid — zsh', width: 780, height: 500 },
   resume: { title: 'Abuzaid_Resume.pdf', width: 800, height: 700 },
   contact: { title: 'Contact', width: 540, height: 640 },
@@ -229,6 +231,8 @@ export const menuOrder = ['File', 'Edit', 'View', 'Window', 'Help']
 export const menus = {
   logo: [
     { label: 'About This Portfolio', action: 'launch:notes' },
+    { label: 'System Settings…', action: 'launch:settings', shortcut: '⌘,' },
+    { label: 'Wallpaper Settings…', action: 'launch:settings' },
     { type: 'separator' },
     { label: 'Spotlight Search…', action: 'spotlight', shortcut: '⌘K' },
     { label: 'Lock Screen', action: 'lock' },
@@ -253,7 +257,7 @@ export const menus = {
     { label: 'Paste', shortcut: '⌘V', disabled: true },
   ],
   View: [
-    { label: 'Change Wallpaper', action: 'wallpaper' },
+    { label: 'Change Wallpaper…', action: 'launch:settings' },
     { type: 'separator' },
     { label: 'Enter Full Screen', action: 'fullscreen', shortcut: '⌃⌘F' },
     { label: 'Reload', action: 'reload', shortcut: '⌘R' },

@@ -9,6 +9,12 @@ const tile =
 // Dropdown panel from the menu bar's sliders icon: wallpaper, brightness, quick actions.
 export default function ControlCenter({ onClose }) {
   const wallpaperId = useOS((s) => s.wallpaperId)
+  const rawCustomWallpaper = useOS((s) => s.customWallpaper)
+  const customWallpaper =
+    rawCustomWallpaper && rawCustomWallpaper !== 'null' && rawCustomWallpaper !== 'undefined'
+      ? rawCustomWallpaper
+      : null
+  const openWindow = useOS((s) => s.openWindow)
   const setWallpaper = useOS((s) => s.setWallpaper)
   const brightness = useOS((s) => s.brightness)
   const setBrightness = useOS((s) => s.setBrightness)
@@ -27,10 +33,22 @@ export default function ControlCenter({ onClose }) {
       aria-label="Control Center"
       className="glass-menu menu-in absolute right-0 top-[calc(100%+4px)] z-10 max-sm:fixed max-sm:right-2 max-sm:top-[36px] w-[300px] max-w-[calc(100vw-16px)] origin-top-right rounded-2xl p-3 text-white"
     >
-      <div className="mb-2 px-1 text-[11px] font-semibold uppercase tracking-widest text-white/40">Wallpaper</div>
+      <div className="mb-2 flex items-center justify-between px-1 text-[11px] font-semibold uppercase tracking-widest text-white/40">
+        <span>Wallpaper</span>
+        <button
+          type="button"
+          onClick={() => {
+            onClose()
+            openWindow('settings')
+          }}
+          className="text-[10.5px] font-medium text-accent hover:underline cursor-pointer"
+        >
+          More…
+        </button>
+      </div>
       <div className="grid grid-cols-5 gap-2">
         {wallpapers.map((w) => {
-          const on = w.id === wallpaperId
+          const on = !customWallpaper && w.id === wallpaperId
           return (
             <button
               key={w.id}
@@ -49,7 +67,7 @@ export default function ControlCenter({ onClose }) {
         })}
       </div>
       <div className="mt-1.5 px-1 text-xs text-white/55">
-        {wallpapers.find((w) => w.id === wallpaperId)?.name}
+        {customWallpaper ? 'Photo from Gallery (Active)' : wallpapers.find((w) => w.id === wallpaperId)?.name}
       </div>
 
       {/* Desktop Pet Section in Control Center */}

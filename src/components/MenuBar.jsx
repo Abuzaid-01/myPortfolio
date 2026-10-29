@@ -113,7 +113,7 @@ export default function MenuBar() {
     else if (a === 'fullscreen') toggleFullscreen()
     else if (a === 'spotlight') setTimeout(openSpotlight, 40)
     else if (a === 'lock') lock()
-    else if (a === 'wallpaper') nextWallpaper()
+    else if (a === 'wallpaper') openWindow('settings')
     else if (a === 'restart') restart()
     setOpen(null)
   }

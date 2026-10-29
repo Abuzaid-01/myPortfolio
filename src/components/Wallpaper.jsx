@@ -42,30 +42,69 @@ export default function Wallpaper() {
     filter: `brightness(${brightness})`,
   }
 
+  const isValidCustom =
+    typeof customWallpaper === 'string' &&
+    customWallpaper.trim() !== '' &&
+    customWallpaper !== 'null' &&
+    customWallpaper !== 'undefined'
+  const isValidDefault =
+    typeof wallpaper?.image === 'string' &&
+    wallpaper.image.trim() !== '' &&
+    wallpaper.image !== 'null' &&
+    wallpaper.image !== 'undefined'
+  const activeImage = isValidCustom ? customWallpaper : isValidDefault ? wallpaper.image : null
+
   return (
     <div data-wallpaper={wp.id} className="wallpaper fixed inset-0 z-0 overflow-hidden bg-[#070a14]" style={vars}>
       <div ref={layer} className="absolute -inset-12">
-        {customWallpaper || wallpaper.image ? (
+        {activeImage ? (
           <img
-            src={customWallpaper || wallpaper.image}
+            src={activeImage}
             alt="Desktop Wallpaper"
             className="h-full w-full object-cover transition-opacity duration-500"
             draggable={false}
           />
         ) : (
           <>
-            <div className="wp-base absolute inset-0" />
             <div
-              className="blob"
-              style={{ width: '46vw', height: '46vw', left: '-6vw', top: '-8vh', background: 'var(--b1)', animation: 'drift-a 22s ease-in-out infinite' }}
+              className="wp-base absolute inset-0"
+              style={{
+                background: `radial-gradient(1200px 800px at 15% 8%, ${wp.base[0]} 0%, transparent 60%), radial-gradient(900px 700px at 88% 18%, ${wp.base[1]} 0%, transparent 55%), linear-gradient(180deg, #0a0f20 0%, #05060a 100%)`,
+              }}
             />
             <div
               className="blob"
-              style={{ width: '40vw', height: '40vw', right: '-4vw', top: '6vh', background: 'var(--b2)', animation: 'drift-b 26s ease-in-out infinite' }}
+              style={{
+                width: '46vw',
+                height: '46vw',
+                left: '-6vw',
+                top: '-8vh',
+                backgroundColor: wp.blobs[0],
+                animation: 'drift-a 22s ease-in-out infinite',
+              }}
             />
             <div
               className="blob"
-              style={{ width: '50vw', height: '42vw', left: '28vw', bottom: '-18vh', background: 'var(--b3)', opacity: 0.7, animation: 'drift-c 30s ease-in-out infinite' }}
+              style={{
+                width: '40vw',
+                height: '40vw',
+                right: '-4vw',
+                top: '6vh',
+                backgroundColor: wp.blobs[1],
+                animation: 'drift-b 26s ease-in-out infinite',
+              }}
+            />
+            <div
+              className="blob"
+              style={{
+                width: '50vw',
+                height: '42vw',
+                left: '28vw',
+                bottom: '-18vh',
+                backgroundColor: wp.blobs[2],
+                opacity: 0.7,
+                animation: 'drift-c 30s ease-in-out infinite',
+              }}
             />
           </>
         )}

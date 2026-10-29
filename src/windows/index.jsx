@@ -10,6 +10,7 @@ const GitHub = lazy(() => import('./GitHub'))
 const LinkedIn = lazy(() => import('./LinkedIn'))
 const X = lazy(() => import('./X'))
 const Photos = lazy(() => import('./Photos'))
+const Settings = lazy(() => import('./Settings'))
 
 // id -> window body component (ids match windowConfig + dockApps)
 export const windowContent = {
@@ -22,4 +23,5 @@ export const windowContent = {
   linkedin: LinkedIn,
   x: X,
   photos: Photos,
+  settings: Settings,
 }
