@@ -406,15 +406,15 @@ export const projects = [
 export const experience = [
   {
     org: 'DomAIyn Labs',
-    role: 'AI / ML Developer',
+    role: 'AI / ML Intern',
     period: 'Apr 2026 – Present',
-    location: 'New Delhi, India',
+    location: 'Remote',
     bullets: [
+      'Working on AI safety/Governance and robustness of Large Language Models (LLMs) as part of the red/blue team.',
+      'Conducting adversarial testing and prompt injection experiments to identify vulnerabilities in LLM deployments.',
+      'Collaborating on designing evaluation benchmarks and safety guardrails to improve model alignment.',
       'Building systems to protect LLMs against adversarial prompt attacks and jailbreaks.',
       'Contributing to real-time LLM threat detection & response pipelines (<15ms latency).',
-      'Developing compliance tooling aligned with EU AI Act safety requirements.',
-      'Researching shadow AI discovery and hallucination detection in regulated enterprise environments.',
-      'Deploying on-premise AI safety components with zero data exfiltration.',
     ],
     tech: ['Python', 'PyTorch', 'FastAPI', 'LangChain', 'FAISS', 'Hugging Face', 'XGBoost', 'EU AI Act'],
   },
@@ -434,7 +434,7 @@ export const experience = [
     role: 'Volunteer',
     period: 'Jul 2024 – Present',
     location: 'Delhi',
-    bullets: ['Participated in food drives and logistics to provide meals to underprivileged communities across Delhi.'],
+    bullets: ['Participated in food drives to provide meals to underprivileged communities.'],
     tech: ['Community Service', 'Outreach'],
   },
 ]
